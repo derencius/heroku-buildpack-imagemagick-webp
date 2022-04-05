@@ -10,6 +10,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
   libheif-dev libjpeg-dev libpng-dev libtiff-dev libgif-dev libomp-dev
 
+ENV PKG_CONFIG_PATH="/usr/src/imagemagick/lib/pkgconfig:$PKG_CONFIG_PATH"
+
 # https://github.com/strukturag/libde265/releases
 ENV LIBDE265_VERSION=1.0.8
 
@@ -51,7 +53,7 @@ ENV LD_LIBRARY_PATH="/usr/src/imagemagick/lib:$LD_LIBRARY_PATH"
 RUN ldconfig /usr/src/imagemagick/lib/
 
 # https://imagemagick.org/script/changelog.php
-ENV IMAGEMAGICK_VERSION=7.1.0-22
+ENV IMAGEMAGICK_VERSION=7.1.0-28
 
 RUN cd /usr/src/ \
   && wget https://imagemagick.org/download/releases/ImageMagick-$IMAGEMAGICK_VERSION.tar.gz \
